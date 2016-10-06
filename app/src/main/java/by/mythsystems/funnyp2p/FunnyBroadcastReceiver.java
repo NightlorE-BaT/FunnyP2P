@@ -4,8 +4,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.support.v4.content.WakefulBroadcastReceiver;
+import android.util.Log;
 
 public class FunnyBroadcastReceiver extends WakefulBroadcastReceiver {
+
+	private static String LOG_TAG = "FUNNY BROADCAST RECEIVER";
 
 	@Override
 	public void onReceive( Context context, Intent intent ) {
@@ -15,9 +18,11 @@ public class FunnyBroadcastReceiver extends WakefulBroadcastReceiver {
 			// the Activity.
 			int state = intent.getIntExtra( WifiP2pManager.EXTRA_WIFI_STATE, -1);
 			if (state == WifiP2pManager.WIFI_P2P_STATE_ENABLED) {
-				activity.setIsWifiP2pEnabled(true);
+				PCLog.print( Log.DEBUG, LOG_TAG, "WifiP2p Enabled" );
+//				activity.setIsWifiP2pEnabled(true);
 			} else {
-				activity.setIsWifiP2pEnabled(false);
+				PCLog.print( Log.DEBUG, LOG_TAG, "WifiP2p Disabled" );
+//				activity.setIsWifiP2pEnabled(false);
 			}
 		} else if (WifiP2pManager.WIFI_P2P_PEERS_CHANGED_ACTION.equals(action)) {
 
@@ -30,11 +35,10 @@ public class FunnyBroadcastReceiver extends WakefulBroadcastReceiver {
 			// that.
 
 		} else if (WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION.equals(action)) {
-			DeviceListFragment fragment = (DeviceListFragment) activity.getFragmentManager()
-					.findFragmentById(R.id.frag_list);
-			fragment.updateThisDevice((WifiP2pDevice) intent.getParcelableExtra(
-					WifiP2pManager.EXTRA_WIFI_P2P_DEVICE));
-
+//			DeviceListFragment fragment = (DeviceListFragment) activity.getFragmentManager()
+//					.findFragmentById(R.id.frag_list);
+//			fragment.updateThisDevice((WifiP2pDevice) intent.getParcelableExtra(
+//					WifiP2pManager.EXTRA_WIFI_P2P_DEVICE));
 		}
 	}
 }
