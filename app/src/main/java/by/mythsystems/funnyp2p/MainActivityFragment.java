@@ -26,22 +26,24 @@ public class MainActivityFragment extends Fragment {
 
 	@Override
 	public void onViewCreated( View view, @Nullable Bundle savedInstanceState ) {
-		updateFiFiStatusDisplay();
+		View contentView = getView();
+
+		if ( contentView != null ) {
+			mWiFiStatusTextView = (TextView)getView().findViewById( R.id.text_wifi_status );
+
+			updateFiFiStatusDisplay();
+		}
+
 		super.onViewCreated( view, savedInstanceState );
 	}
 
 	public void updateFiFiStatusDisplay() {
-		View contentView = getView();
+		byte status = MainActivity.getWiFiStatusCode();
 
-		if ( contentView != null ) {
-			byte status = MainActivity.getWiFiStatusCode();
-			updateWiFiStatusText( status );
-		}
+		updateWiFiStatusText( status );
 	}
 
 	private void updateWiFiStatusText( byte statusCode ) {
-		mWiFiStatusTextView = (TextView)getView().findViewById( R.id.text_wifi_status );
-
 		int statusId;
 
 		switch ( statusCode ) {
