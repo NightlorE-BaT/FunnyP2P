@@ -79,11 +79,26 @@ public class MainActivityFragment extends Fragment {
 	private void createTable( ViewGroup tableView, int membersCount ) {
 		mTableMembers.clear();
 
+		float rotStep = 360 / membersCount;
+		LayoutInflater inflater = getActivity().getLayoutInflater();
+		int memberWidth = 300 / ( ( membersCount + 1 ) / 2 );
+		int memberHeight = 300 / ( ( membersCount + 1 ) / 2 );
+
 		for ( int mi = 0; mi < membersCount; mi++ ) {
-			ViewGroup memberView = new RelativeLayout( tableView.getContext() );
+			boolean isNextSide = mi > ( mi + 1 ) / 2;
+//			ViewGroup memberView = new RelativeLayout( tableView.getContext() );
+			RelativeLayout memberView = (RelativeLayout)inflater.inflate( R.layout.layout_table_member, null, false );
 			memberView.setBackgroundResource( R.drawable.segment_1_3_white );
-			RelativeLayout.LayoutParams lParams = new RelativeLayout.LayoutParams( ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-			lParams.addRule( RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE );
+//			RelativeLayout.LayoutParams lParams = new RelativeLayout.LayoutParams( ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+			RelativeLayout.LayoutParams lParams = new RelativeLayout.LayoutParams( 150, 200 );
+			memberView.setRotation( mi * rotStep );
+			if ( isNextSide ) {
+				lParams.addRule( RelativeLayout.LE, 200 );
+				lParams.addRule( RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE );
+			} else {
+				lParams.addRule( RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE );
+			}
+//			lParams.addRule( RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE );
 			tableView.addView( memberView, mi, lParams );
 		}
 	}
