@@ -3,4 +3,11 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorTitleDark">#BA1F23</color>
+    <color name="colorTitle">#CA2E31</color>
+    <color name="colorGameProgressBG">#DDDDDD</color>
+    <color name="colorGameProgress">#FD8B2E</color>
+    <color name="colorGameProgress0">#00FF00</color>
+    <color name="colorGameProgress1">#FF0000</color>
+
 </resources>
